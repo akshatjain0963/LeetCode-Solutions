@@ -1,34 +1,12 @@
 class Solution {
 public:
-    vector<int> largestDivisibleSubset(vector<int>& v) {
-        sort(v.begin(),v.end());
-        int n=v.size();
-        vector<int>dp(n,1),ans(n);
-        int mx=0;
-        int in=0;
-        for(int i=0;i<n;i++){
-            ans[i]=i;
-            for(int j=0;j<i;j++){
-                if(v[i]%v[j]==0){
-                    if(dp[i]<dp[j]+1){
-                        dp[i]=dp[j]+1;
-                        ans[i]=j;
-                        if(mx<dp[i]){
-                            mx=dp[i];
-                            in=i;
-                        }
-                    }
-                }
-            }
+    int lengthOfLIS(vector<int>& v) {
+        vector<int>a;
+        for(int i=0;i<v.size();i++){
+            int in=lower_bound(a.begin(),a.end(),v[i])-a.begin();
+            if(in>=a.size())a.push_back(v[i]);
+            else a[in]=v[i];
         }
-        vector<int>f;
-        while(ans[in]!=in){
-            f.push_back(v[in]);
-            in=ans[in];
-        }
-        f.push_back(v[in]);
-        reverse(f.begin(),f.end());
-        return f;
-
+        return a.size();
     }
 };
