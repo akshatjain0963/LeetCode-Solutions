@@ -1,6 +1,3 @@
-...// } Driver Code Ends
-//User function Template for C++
-class Solution{
     static bool cmp(vector<int> &v1, vector<int> &v2){
         return v1[0] < v2[0];
     }
@@ -36,3 +33,7 @@ public:
         }
         
         take += solve(v, idx, rem-1, dp); //note that we passed idx and not i+1
+        return dp[i][rem] = max(take, notTake);
+    }
+};
+...// } Driver Code Ends
